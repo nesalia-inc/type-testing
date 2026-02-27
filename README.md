@@ -1,38 +1,48 @@
-# @deessejs/type-testing
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/icon.png">
+    <source media="(prefers-color-scheme: light)" srcset="public/icon.png">
+    <img src="public/icon.png" alt="type-testing" width="150" height="150" style="border-radius: 50%;">
+  </picture>
+</p>
 
-A TypeScript monorepo for compile-time type testing.
+<h1 align="center">@deessejs/type-testing</h1>
 
-## Packages
+<p align="center">
+  <a href="https://www.npmjs.com/package/@deessejs/type-testing">
+    <img src="https://img.shields.io/npm/v/@deessejs/type-testing" alt="npm Version">
+  </a>
+  <a href="https://www.npmjs.com/package/@deessejs/type-testing">
+    <img src="https://img.shields.io/bundlejs/size/@deessejs/type-testing" alt="Bundle Size">
+  </a>
+  <a href="https://github.com/nesalia-inc/type-testing/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/nesalia-inc/type-testing/ci?label=tests" alt="Tests">
+  </a>
+  <a href="https://github.com/nesalia-inc/type-testing/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/nesalia-inc/type-testing" alt="License">
+  </a>
+</p>
 
-- [`packages/type-testing`](packages/type-testing/) - A micro library for compile-time type testing in TypeScript
+> A micro library for compile-time type testing in TypeScript.
 
-## Setup
+## Requirements
+
+- TypeScript 5.0+
+
+## Installation
 
 ```bash
-# Install dependencies
-pnpm install
+# Install type-testing
+npm install @deessejs/type-testing
 
-# Enable husky
-pnpm prepare
+# Or using pnpm
+pnpm add @deessejs/type-testing
+
+# Or using yarn
+yarn add @deessejs/type-testing
 ```
 
-## Scripts
-
-| Command | Description |
-|---------|-------------|
-| `pnpm build` | Build all packages |
-| `pnpm dev` | Run dev mode with watch |
-| `pnpm lint` | Run ESLint |
-| `pnpm typecheck` | Run TypeScript type checking |
-| `pnpm test` | Run vitest |
-| `pnpm release` | Version bump with changesets |
-| `pnpm publish` | Publish packages to npm |
-
-## Type Testing Package
-
-For usage instructions, see [`packages/type-testing/README.md`](packages/type-testing/README.md)
-
-### Quick Start
+## Usage
 
 ```typescript
 import { Equal, check, assert, expect } from '@deessejs/type-testing'
@@ -50,35 +60,54 @@ assert<{ a: string }>().hasProperty('a')
 expect<string, string>().toBeEqual()
 ```
 
-### Running Tests
+## Features
 
-```bash
-# Run all tests
-pnpm test
+- **Type Equality** - Strict and simple equality checks
+- **Special Type Detection** - IsAny, IsNever, IsUnknown, IsVoid, etc.
+- **Union/Tuple/Array Detection** - IsUnion, IsTuple, IsArray
+- **Type Inhabitation** - IsInhabited, IsUninhabited
+- **Property Testing** - HasProperty, PropertyType
+- **Function Types** - Parameters, ReturnType, Parameter
+- **Chainable API** - check(), assert(), expect() for fluent testing
 
-# Run tests for type-testing package
-pnpm --filter type-testing test
+## API Reference
 
-# Run tests with coverage
-pnpm --filter type-testing test -- --coverage
-```
+### Types
 
-## Release
+| Type | Description |
+|------|-------------|
+| `Equal<T, U>` | Strict equality check |
+| `NotEqual<T, U>` | Inequality check |
+| `IsAny<T>` | Check if type is `any` |
+| `IsNever<T>` | Check if type is `never` |
+| `IsUnknown<T>` | Check if type is `unknown` |
+| `IsNullable<T>` | Check if type is `null \| undefined` |
+| `IsUnion<T>` | Check if type is a union |
+| `IsTuple<T>` | Check if type is a tuple |
+| `IsArray<T>` | Check if type is an array |
 
-```bash
-# Create a changeset
-pnpm changeset add
+### Functions
 
-# Version bump
-pnpm release
+| Function | Description |
+|----------|-------------|
+| `check<T>()` | Create a chainable type checker |
+| `assert<T>()` | Create an assert type checker (throws on failure) |
+| `expect<T, U>()` | Create an expect-style type checker |
 
-# Publish (CI will do this on tag push)
-pnpm publish
-```
+For complete documentation, see [packages/type-testing/README.md](packages/type-testing/README.md)
 
-## Git Hooks
+## Contributing
 
-Pre-commit hooks run automatically:
-- `pnpm turbo lint`
-- `pnpm turbo typecheck`
-- `pnpm turbo test`
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Author
+
+- **Nesalia Inc.**
+
+## Security
+
+If you discover any security vulnerabilities, please send an e-mail to security@nesalia.com.
+
+## License
+
+MIT License - see the [LICENSE](LICENSE) file for details.
