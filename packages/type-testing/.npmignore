@@ -1,0 +1,11 @@
+node_modules
+dist
+coverage
+.turbo
+*.log
+*.tsbuildinfo
+.eslintrc.json
+tests
+src
+.git
+.github
