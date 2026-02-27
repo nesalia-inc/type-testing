@@ -1,6 +1,10 @@
-# Package Template
+# @deessejs/type-testing
 
-TypeScript monorepo template with pnpm, turbo, vitest, husky, and changesets.
+A TypeScript monorepo for compile-time type testing.
+
+## Packages
+
+- [`packages/type-testing`](packages/type-testing/) - A micro library for compile-time type testing in TypeScript
 
 ## Setup
 
@@ -24,11 +28,40 @@ pnpm prepare
 | `pnpm release` | Version bump with changesets |
 | `pnpm publish` | Publish packages to npm |
 
-## Adding a Package
+## Type Testing Package
 
-1. Create a new directory in `packages/`
-2. Add a `package.json` with the required scripts
-3. Add a `tsconfig.json` extending the root config
+For usage instructions, see [`packages/type-testing/README.md`](packages/type-testing/README.md)
+
+### Quick Start
+
+```typescript
+import { Equal, check, assert, expect } from '@deessejs/type-testing'
+
+// Simple type equality
+type Test = Equal<string, string>  // true
+
+// Chainable API
+check<string>().equals<string>()   // passes
+
+// Assert with clear errors
+assert<{ a: string }>().hasProperty('a')
+
+// Expect syntax
+expect<string, string>().toBeEqual()
+```
+
+### Running Tests
+
+```bash
+# Run all tests
+pnpm test
+
+# Run tests for type-testing package
+pnpm --filter type-testing test
+
+# Run tests with coverage
+pnpm --filter type-testing test -- --coverage
+```
 
 ## Release
 

@@ -1,6 +1,13 @@
 # @deessejs/type-testing
 
+![Type Testing](./public/icon.png)
+
 A micro library for compile-time type testing in TypeScript.
+
+[![npm version](https://img.shields.io/npm/v/@deessejs/type-testing.svg)](https://www.npmjs.com/package/@deessejs/type-testing)
+[![npm bundle size](https://img.shields.io/bundlejs/size/@deessejs/type-testing)](https://www.npmjs.com/package/@deessejs/type-testing)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 ## Installation
 
@@ -8,104 +15,250 @@ A micro library for compile-time type testing in TypeScript.
 npm install @deessejs/type-testing
 ```
 
-## Usage
+Or with pnpm:
+
+```bash
+pnpm add @deessejs/type-testing
+```
+
+Or with yarn:
+
+```bash
+yarn add @deessejs/type-testing
+```
+
+## Quick Start
+
+```typescript
+import { Equal, check, assert, expect } from '@deessejs/type-testing'
+
+// Simple type equality
+type Test = Equal<string, string>  // true
+
+// Chainable API
+check<string>().equals<string>()   // passes
+
+// Assert with clear errors
+assert<{ a: string }>().hasProperty('a')
+
+// Expect syntax
+expect<string, string>().toBeEqual()
+```
+
+## Core Types
 
 ### Type Equality
 
 ```typescript
 import { Equal, NotEqual, SimpleEqual } from '@deessejs/type-testing'
 
-// Strict equality check
-type Test1 = Equal<string, string>  // true
-type Test2 = Equal<string, number>   // false
+// Strict equality (handles any, never, etc.)
+Equal<string, string>           // true
+Equal<string, number>           // false
 
 // Inequality check
-type Test3 = NotEqual<string, number> // true
+NotEqual<string, number>        // true
 
-// Simple equality
-type Test4 = SimpleEqual<{ a: string }, { a: string }> // true
+// Simple equality (for plain objects)
+SimpleEqual<{ a: string }, { a: string }>  // true
 ```
 
 ### Special Type Detection
 
 ```typescript
-import { IsAny, IsNever, IsUnknown, IsNullable, IsOptional } from '@deessejs/type-testing'
+import {
+  IsAny,
+  IsNever,
+  IsUnknown,
+  IsVoid,
+  IsUndefined,
+  IsNull,
+  IsNullable,
+  IsOptional
+} from '@deessejs/type-testing'
 
-IsAny<any>        // true
-IsNever<never>    // true
-IsUnknown<unknown> // true
-IsNullable<string | null>  // true
+IsAny<any>                      // true
+IsNever<never>                  // true
+IsUnknown<unknown>             // true
+IsVoid<void>                    // true
+IsUndefined<undefined>          // true
+IsNull<null>                    // true
+
+// Nullable = null | undefined
+IsNullable<string | null>       // true
+IsNullable<string | undefined>  // true
+
+// Optional = may include undefined
 IsOptional<string | undefined> // true
 ```
 
-### Chainable API - check()
+### Union, Tuple & Array
+
+```typescript
+import { IsUnion, IsTuple, IsArray } from '@deessejs/type-testing'
+
+// Unions
+IsUnion<'a' | 'b'>               // true
+IsUnion<'a'>                     // false
+
+// Tuples (fixed-length arrays)
+IsTuple<[string, number]>        // true
+IsTuple<[]>                      // true
+IsTuple<string[]>                // false
+
+// Arrays (dynamic-length)
+IsArray<string[]>                // true
+IsArray<[string]>                // false
+```
+
+### Type Inhabitation
+
+```typescript
+import { IsInhabited, IsUninhabited } from '@deessejs/type-testing'
+
+// Has at least one value
+IsInhabited<string>              // true
+IsInhabited<never>               // false
+
+// Has no values (never)
+IsUninhabited<never>             // true
+IsUninhabited<string>            // false
+```
+
+### Property Testing
+
+```typescript
+import { HasProperty, PropertyType } from '@deessejs/type-testing'
+
+// Check if type has a property
+HasProperty<{ a: string }, 'a'>  // true
+HasProperty<{ a: string }, 'b'>  // false
+
+// Get property type
+PropertyType<{ a: string }, 'a'> // string
+```
+
+### Function Types
+
+```typescript
+import { Parameters, ReturnType, Parameter } from '@deessejs/type-testing'
+
+// Get parameters as tuple
+Parameters<(a: string, b: number) => void>  // [string, number]
+
+// Get return type
+ReturnType<(a: string) => number>           // number
+
+// Get parameter at index
+Parameter<(a: string, b: number), 0>        // string
+Parameter<(a: string, b: number), 1>         // number
+```
+
+### Length
+
+```typescript
+import { Length } from '@deessejs/type-testing'
+
+Length<['a', 'b', 'c']>            // 3
+Length<[]>                          // 0
+```
+
+## Chainable API
+
+### check() - Soft type checking
 
 ```typescript
 import { check } from '@deessejs/type-testing'
 
-// Type equals
+// Type equality
 check<string>().equals<string>()           // passes
-check<string>().equals<number>()           // fails at compile time
+check<string>().equals<number>()            // fails at compile time
 
 // Type extends
 check<string>().extends<string>()          // passes
-check<string>().extends<any>()             // passes
+check<string>().extends<any>()              // passes
 
 // Property check
 check<{ a: string }>().hasProperty('a')    // passes
+check<{ a: string }>().hasProperty('b')     // fails
 
 // Special types
-check<any>().isAny()                       // passes
-check<never>().isNever()                   // passes
-check<unknown>().isUnknown()               // passes
+check<any>().isAny()                        // passes
+check<never>().isNever()                    // passes
+check<unknown>().isUnknown()                // passes
 
 // Nullable/Optional
-check<string | null>().isNullable()        // passes
-check<string | undefined>().isOptional()   // passes
+check<string | null>().isNullable()         // passes
+check<string | undefined>().isOptional()     // passes
 
 // Union/Tuple/Array
-check<'a' | 'b'>().isUnion()              // passes
-check<[string, number]>().isTuple()        // passes
-check<string[]>().isArray()                // passes
+check<'a' | 'b'>().isUnion()                // passes
+check<[string, number]>().isTuple()         // passes
+check<string[]>().isArray()                  // passes
 ```
 
-### Chainable API - assert()
+### assert() - Strict type checking
+
+Similar to `check()` but throws at compile time on failure with a clearer error message.
 
 ```typescript
 import { assert } from '@deessejs/type-testing'
 
-// Similar to check() but throws at compile time on failure
-assert<string>().equals<string>()
-assert<{ a: string }>().hasProperty('a')
+// Fails with a clear error message
+assert<string>().equals<number>()           // compile error
+assert<{ a: string }>().hasProperty('b')    // compile error
 ```
 
-### Chainable API - expect()
+### expect() - BDD-style API
 
 ```typescript
 import { expect } from '@deessejs/type-testing'
 
 // Compare two types
-expect<string, string>().toBeEqual()       // passes
-expect<string, number>().toBeNotEqual()    // passes
-expect<string>().toExtend<string>()        // passes
+expect<string, string>().toBeEqual()         // passes
+expect<string, number>().toBeNotEqual()     // passes
+
+// Type extends
+expect<string>().toExtend<string>()          // passes
+
+// Special types
+expect<any>().toBeAny()                      // passes
+expect<never>().toBeNever()                  // passes
+
+// Nullable/Optional
+expect<string | null>().toBeNullable()       // passes
+expect<string | undefined>().toBeOptional()  // passes
 ```
 
-### Compile-time Assertions
+## Compile-time Assertions
+
+### ExpectTrue & ExpectEqual
 
 ```typescript
-import { expectFalse, ExpectTrue, ExpectEqual } from '@deessejs/type-testing'
+import { ExpectTrue, ExpectEqual } from '@deessejs/type-testing'
 
-// Assert a type is false
-expectFalse<IsNever<string>>()
+// Assert a type is true
+type Test1 = ExpectTrue<true>                // true
 
-// Assert equality
-type Test = ExpectEqual<string, string>  // string
+// Assert equality - throws if not equal
+type Test2 = ExpectEqual<string, string>    // string
 
-// Assert true
-ExpectTrue<true>
+// Using with type tests
+type IsString<T> = ExpectEqual<T, string>
+type Result = IsString<string>              // string (passes)
 ```
 
-## API
+### expectFalse
+
+```typescript
+import { expectFalse } from '@deessejs/type-testing'
+
+// Assert T is false at compile time
+expectFalse<false>()                        // passes
+expectFalse<true>()                         // compile error
+```
+
+## API Reference
 
 ### Types
 
@@ -113,7 +266,7 @@ ExpectTrue<true>
 |------|-------------|
 | `Equal<T, U>` | Strict equality check |
 | `NotEqual<T, U>` | Inequality check |
-| `SimpleEqual<T, U>` | Simple equality |
+| `SimpleEqual<T, U>` | Simple equality for plain types |
 | `IsAny<T>` | Check if type is `any` |
 | `IsNever<T>` | Check if type is `never` |
 | `IsUnknown<T>` | Check if type is `unknown` |
@@ -125,22 +278,24 @@ ExpectTrue<true>
 | `IsUnion<T>` | Check if type is a union |
 | `IsTuple<T>` | Check if type is a tuple |
 | `IsArray<T>` | Check if type is an array |
-| `IsInhabited<T>` | Check if type has values |
+| `IsInhabited<T>` | Check if type has at least one value |
 | `IsUninhabited<T>` | Check if type has no values |
-| `HasProperty<T, K>` | Check if type has property |
-| `PropertyType<T, K>` | Get property type |
-| `Parameters<T>` | Get function parameters |
+| `HasProperty<T, K>` | Check if type has property K |
+| `PropertyType<T, K>` | Get type of property K |
+| `Parameters<T>` | Get function parameters as tuple |
 | `ReturnType<T>` | Get function return type |
 | `Parameter<T, N>` | Get parameter at index N |
 | `Length<T>` | Get tuple/array length |
+| `ExpectTrue<T>` | Assert T is true |
+| `ExpectEqual<T, U>` | Assert T equals U |
 
 ### Functions
 
 | Function | Description |
 |----------|-------------|
 | `check<T>()` | Create a chainable type checker |
-| `assert<T>()` | Create an assert type checker |
-| `expect<T, U>()` | Create an expect type checker |
+| `assert<T>()` | Create an assert type checker (throws on failure) |
+| `expect<T, U>()` | Create an expect-style type checker |
 | `expectFalse<T>()` | Assert T is false at compile time |
 
 ## License
