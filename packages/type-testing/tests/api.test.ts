@@ -5,36 +5,36 @@
  * The actual type tests are done at compile time.
  */
 
-import { describe, it } from 'vitest'
-import { expectFalse } from '../src'
+import { describe, it, expect } from 'vitest'
+import { check, assert, expect as expectFn, expectFalse } from '../src'
 
 describe('check() API', () => {
   it('should create check interface', () => {
-    // If this compiles, check<string>() works
-    const c: any = null
-    void c
+    const c = check<string>()
+    // Functions return undefined at runtime, but types are checked at compile time
+    expect(c).toBeUndefined()
   })
 })
 
 describe('assert() API', () => {
   it('should create assert interface', () => {
-    // If this compiles, assert<string>() works
-    const a: any = null
-    void a
+    const a = assert<string>()
+    expect(a).toBeUndefined()
   })
 })
 
 describe('expect() API', () => {
   it('should create expect interface', () => {
-    // If this compiles, expect<string, string>() works
-    const e: any = null
-    void e
+    const e = expectFn<string, string>()
+    expect(e).toBeUndefined()
   })
 })
 
 describe('expectFalse', () => {
   it('should compile for false', () => {
-    // If this compiles, expectFalse works
+    // If this compiles, expectFalse works at compile time
     expectFalse<false>()
+    // Function returns void at runtime
+    expect(expectFalse<false>()).toBeUndefined()
   })
 })
