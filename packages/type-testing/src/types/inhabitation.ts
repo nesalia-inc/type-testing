@@ -2,8 +2,6 @@
  * Type inhabitation utilities.
  */
 
-import type { IsNever } from './special'
-
 /**
  * Checks if a type is inhabited (has at least one value).
  *
@@ -13,7 +11,7 @@ import type { IsNever } from './special'
  * check<never>().isInhabited() // fails
  * ```
  */
-export type IsInhabited<T> = IsNever<T> extends true ? false : true
+export type IsInhabited<T> = [T] extends [never] ? false : true
 
 /**
  * Checks if a type is uninhabited (has no values).
@@ -24,4 +22,4 @@ export type IsInhabited<T> = IsNever<T> extends true ? false : true
  * check<string>().isUninhabited() // fails
  * ```
  */
-export type IsUninhabited<T> = IsNever<T> extends true ? true : false
+export type IsUninhabited<T> = [T] extends [never] ? true : false

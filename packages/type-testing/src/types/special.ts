@@ -35,7 +35,7 @@ export type IsNever<T> = [T] extends [never] ? true : false
  * check<unknown>().isUnknown() // passes
  * ```
  */
-export type IsUnknown<T> = unknown extends T ? ([T] extends [null] ? false : true) : false
+export type IsUnknown<T> = [unknown] extends [T] ? ([T] extends [unknown] ? true : false) : false
 
 /**
  * Checks if a type is `void`.
@@ -55,9 +55,9 @@ export type IsNull<T> = Equal<T, null>
 /**
  * Checks if a type is `null` or `undefined`.
  */
-export type IsNullable<T> = null extends T ? true : (undefined extends T ? true : false)
+export type IsNullable<T> = [null] extends [T] ? true : ([undefined] extends [T] ? true : false)
 
 /**
  * Checks if a type is optional (may be undefined).
  */
-export type IsOptional<T> = undefined extends T ? true : false
+export type IsOptional<T> = [undefined] extends [T] ? true : false
