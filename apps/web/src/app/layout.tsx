@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistPixelSquare } from "geist/font/pixel";
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
 export const geistSans = GeistSans;
@@ -49,6 +50,7 @@ export default function RootLayout({
         >
           <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
