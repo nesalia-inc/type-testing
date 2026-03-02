@@ -22,6 +22,10 @@
       "dependsOn": ["^test"],
       "cache": true
     },
+    "test:coverage": {
+      "dependsOn": ["^test:coverage"],
+      "cache": true
+    },
     "clean": {
       "cache": false
     }

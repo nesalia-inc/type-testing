@@ -9,6 +9,7 @@
     "lint": "turbo lint",
     "typecheck": "turbo typecheck",
     "test": "turbo test",
+    "test:coverage": "turbo test:coverage",
     "clean": "turbo clean",
     "prepare": "husky install",
     "release": "changesets version && pnpm install --no-frozen-lockfile && git add .",
