@@ -40,7 +40,6 @@ export interface Assert<T> {
 
 export type AssertPass = true
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type AssertFail<_T, _Expected> = never
 
 export function assert<T>(): Assert<T> {

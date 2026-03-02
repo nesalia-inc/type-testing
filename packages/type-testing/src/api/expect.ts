@@ -22,7 +22,6 @@ export interface Expect<T, U = unknown> {
 
 export type ExpectPass = true
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type ExpectFail<_T, _U> = never
 
 /**

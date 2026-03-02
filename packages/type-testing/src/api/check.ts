@@ -18,7 +18,6 @@ export type CheckPass = true
 /**
  * Type representing a failing check.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type CheckFail<_T, _Expected> = never
 
 /**
