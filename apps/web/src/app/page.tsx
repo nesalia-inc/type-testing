@@ -49,10 +49,17 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Bottom section - info */}
-          <p className="max-w-md text-xs text-muted-foreground md:text-sm">
-            A micro library for compile-time type testing in TypeScript. Test your types with confidence and precision.
-          </p>
+          {/* Bottom section - install and info */}
+          <div className="flex flex-col gap-4">
+            <div className="flex max-w-md flex-col gap-2 text-xs md:text-sm">
+              <p className="text-muted-foreground">Install via npm</p>
+              <p className="font-mono text-xs text-foreground">npm install @deessejs/type-testing</p>
+            </div>
+
+            <p className="max-w-md text-xs text-muted-foreground md:text-sm">
+              A micro library for compile-time type testing in TypeScript. Test your types with confidence and precision.
+            </p>
+          </div>
         </div>
 
         {/* Right column - visual */}
