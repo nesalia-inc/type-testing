@@ -2,7 +2,7 @@
  * Expect API - Familiar API similar to testing libraries.
  */
 
-import type { Equal, NotEqual } from '../types/equality'
+import type { Equal, NotEqual } from '../types/equality.js'
 
 /**
  * Expect type - familiar API similar to testing libraries.

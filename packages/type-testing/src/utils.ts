@@ -2,7 +2,7 @@
  * Additional utilities.
  */
 
-import type { Equal } from './types/equality'
+import type { Equal } from './types/equality.js'
 
 /**
  * Type that always resolves to true.

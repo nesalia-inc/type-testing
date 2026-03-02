@@ -2,12 +2,12 @@
  * Assert API - Alternative API that throws at compile time on failure.
  */
 
-import type { Equal, NotEqual } from '../types/equality'
-import type { IsAny, IsNever, IsUnknown, IsVoid, IsUndefined, IsNull, IsNullable, IsOptional } from '../types/special'
-import type { IsUnion, IsTuple, IsArray } from '../types/union'
-import type { IsInhabited, IsUninhabited } from '../types/inhabitation'
-import type { HasProperty } from '../types/property'
-import type { Check } from './check'
+import type { Equal, NotEqual } from '../types/equality.js'
+import type { IsAny, IsNever, IsUnknown, IsVoid, IsUndefined, IsNull, IsNullable, IsOptional } from '../types/special.js'
+import type { IsUnion, IsTuple, IsArray } from '../types/union.js'
+import type { IsInhabited, IsUninhabited } from '../types/inhabitation.js'
+import type { HasProperty } from '../types/property.js'
+import type { Check } from './check.js'
 
 /**
  * Assert type - alternative API that throws at compile time on failure.

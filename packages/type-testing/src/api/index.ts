@@ -2,6 +2,6 @@
  * API exports.
  */
 
-export * from './check'
-export * from './assert'
-export * from './expect'
+export * from './check.js'
+export * from './assert.js'
+export * from './expect.js'

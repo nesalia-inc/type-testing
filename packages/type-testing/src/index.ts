@@ -5,10 +5,10 @@
  */
 
 // Re-export all type utilities
-export * from './types'
+export * from './types/index.js'
 
 // Re-export API
-export * from './api'
+export * from './api/index.js'
 
 // Re-export utilities
-export * from './utils'
+export * from './utils.js'
