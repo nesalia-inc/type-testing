@@ -33,8 +33,8 @@ importers:
   examples:
     dependencies:
       '@deessejs/type-testing':
-        specifier: ^0.1.1
-        version: 0.1.1
+        specifier: ^0.1.2
+        version: 0.1.2
     devDependencies:
       typescript:
         specifier: ^5.9.3
@@ -137,8 +137,8 @@ packages:
   '@changesets/write@0.4.0':
     resolution: {integrity: sha512-CdTLvIOPiCNuH71pyDu3rA+Q0n65cmAbXnwWH84rKGiFumFzkmHNT8KHTMEchcxN+Kl8I54xGUhJ7l3E7X396Q==}
 
-  '@deessejs/type-testing@0.1.1':
-    resolution: {integrity: sha512-uJUIP1aHqdJjhi5tPIkEJKEff/mwvGISmtZlBFjgfZnZi5a1VXGWrTMnu+P203m8bgpzFc2GLe2E+/xu7jrJjQ==}
+  '@deessejs/type-testing@0.1.2':
+    resolution: {integrity: sha512-j1noJFCVqlhUg2LiiWts3TFO6DDkPGrGGkN4nAFiXaAOs0y861Nwxtdac69kBehUJlwh1G720T+66VYq2CPItg==}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -1662,7 +1662,7 @@ snapshots:
       human-id: 4.1.3
       prettier: 2.8.8
 
-  '@deessejs/type-testing@0.1.1': {}
+  '@deessejs/type-testing@0.1.2': {}
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
