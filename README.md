@@ -18,6 +18,9 @@
   <a href="https://github.com/nesalia-inc/type-testing/actions">
     <img src="https://img.shields.io/github/actions/workflow/status/nesalia-inc/type-testing/ci?label=tests" alt="Tests">
   </a>
+  <a href="https://github.com/nesalia-inc/type-testing/actions">
+    <img src="https://img.shields.io/badge/coverage-100%25-brightgreen" alt="Coverage">
+  </a>
   <a href="https://github.com/nesalia-inc/type-testing/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/nesalia-inc/type-testing" alt="License">
   </a>
