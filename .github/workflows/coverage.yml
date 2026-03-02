@@ -26,7 +26,7 @@ jobs:
         run: pnpm install
 
       - name: Run tests with coverage
-        run: pnpm test:coverage
+        run: pnpm --filter @deessejs/type-testing test:coverage
 
       - name: Post coverage comment
         uses: davelosert/vitest-coverage-report-action@v2
