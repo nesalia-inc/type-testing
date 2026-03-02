@@ -1,0 +1,42 @@
+name: Coverage Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  coverage:
+    name: Check Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run tests with coverage
+        run: pnpm turbo test -- --coverage
+
+      - name: Check coverage threshold
+        run: |
+          COVERAGE=$(pnpm turbo test -- --coverage 2>&1 | grep -oP '\d+%' | head -1)
+          echo "Coverage: $COVERAGE"
+          if [ "$COVERAGE" != "100%" ]; then
+            echo "Error: Coverage is $COVERAGE, expected 100%"
+            exit 1
+          fi
