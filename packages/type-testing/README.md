@@ -164,6 +164,46 @@ Length<['a', 'b', 'c']>            // 3
 Length<[]>                          // 0
 ```
 
+## Runtime Type Checking
+
+The library also provides runtime type checking utilities:
+
+```typescript
+import {
+  // Type check functions returning TypeCheckResult objects
+  isString,
+  isNumber,
+  isBoolean,
+  isObject,
+  isArray,
+  isNull,
+  isUndefined,
+
+  // Boolean type guards (for use in conditionals)
+  isStringGuard,
+  isNumberGuard,
+  isBooleanGuard,
+  isObjectGuard,
+  isArrayGuard,
+  isNullGuard,
+  isUndefinedGuard,
+  isSymbolGuard,
+  isBigIntGuard,
+  isFunctionGuard
+} from '@deessejs/type-testing'
+
+// TypeCheckResult objects
+const stringResult = isString('hello')
+stringResult.matches   // true
+stringResult.value     // 'hello'
+stringResult.typeName   // 'string'
+
+// Boolean type guards
+if (isStringGuard(value)) {
+  // value is narrowed to string here
+}
+```
+
 ## Chainable API
 
 ### check() - Soft type checking

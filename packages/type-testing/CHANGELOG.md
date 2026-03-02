@@ -1,5 +1,11 @@
 # @deessejs/type-testing
 
+## 0.2.0
+
+### Minor Changes
+
+- Add runtime type checking utilities with boolean type guards
+
 ## 0.1.2
 
 ### Patch Changes
