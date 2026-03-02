@@ -28,14 +28,9 @@ jobs:
       - name: Run tests with coverage
         run: pnpm --filter @deessejs/type-testing test:coverage
 
-      - name: Post coverage comment
-        uses: davelosert/vitest-coverage-report-action@v2
-        with:
-          comment-on: pr
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          files: ./coverage/coverage-final.json
+          files: ./packages/type-testing/coverage/coverage-final.json
           flags: unittests
           fail_ci_if_error: false
