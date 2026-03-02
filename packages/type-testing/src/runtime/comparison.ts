@@ -3,50 +3,6 @@
  */
 
 /**
- * Result of a type comparison at runtime.
- */
-export interface ComparisonResult<T, U> {
-  equal: boolean
-  actual: T
-  expected: U
-}
-
-/**
- * Compare a value against an expected type.
- * This uses the value's runtime type to determine the match.
- *
- * @example
- * ```typescript
- * const result = compareType<string>('hello')
- * result.equal // true
- * ```
- */
-export function compareType<T>(value: T): ComparisonResult<T, T> {
-  return {
-    equal: true,
-    actual: value,
-    expected: value,
-  }
-}
-
-/**
- * Compare two values and check if they have the same type.
- *
- * @example
- * ```typescript
- * const result = compareValues('hello', 42)
- * result.equal // false - different types
- * ```
- */
-export function compareValues<T, U>(actual: T, expected: U): ComparisonResult<T, U> {
-  return {
-    equal: typeof actual === typeof expected,
-    actual,
-    expected,
-  }
-}
-
-/**
  * Result of checking if a value matches a type.
  */
 export interface TypeCheckResult<T> {
@@ -172,4 +128,79 @@ export function isUndefined(value: unknown): TypeCheckResult<undefined> {
     value: value as undefined,
     typeName: value === undefined ? 'undefined' : typeof value,
   }
+}
+
+// ============================================
+// Simple boolean type guards
+// ============================================
+
+/**
+ * Type guard that returns true if the value is a string.
+ */
+export function isStringGuard(value: unknown): value is string {
+  return typeof value === 'string'
+}
+
+/**
+ * Type guard that returns true if the value is a number.
+ */
+export function isNumberGuard(value: unknown): value is number {
+  return typeof value === 'number'
+}
+
+/**
+ * Type guard that returns true if the value is a boolean.
+ */
+export function isBooleanGuard(value: unknown): value is boolean {
+  return typeof value === 'boolean'
+}
+
+/**
+ * Type guard that returns true if the value is an object (not null, not array).
+ */
+export function isObjectGuard(value: unknown): value is object {
+  return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
+
+/**
+ * Type guard that returns true if the value is an array.
+ */
+export function isArrayGuard(value: unknown): value is unknown[] {
+  return Array.isArray(value)
+}
+
+/**
+ * Type guard that returns true if the value is null.
+ */
+export function isNullGuard(value: unknown): value is null {
+  return value === null
+}
+
+/**
+ * Type guard that returns true if the value is undefined.
+ */
+export function isUndefinedGuard(value: unknown): value is undefined {
+  return value === undefined
+}
+
+/**
+ * Type guard that returns true if the value is a symbol.
+ */
+export function isSymbolGuard(value: unknown): value is symbol {
+  return typeof value === 'symbol'
+}
+
+/**
+ * Type guard that returns true if the value is a bigint.
+ */
+export function isBigIntGuard(value: unknown): value is bigint {
+  return typeof value === 'bigint'
+}
+
+/**
+ * Type guard that returns true if the value is a function.
+ */
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+export function isFunctionGuard(value: unknown): value is Function {
+  return typeof value === 'function'
 }
