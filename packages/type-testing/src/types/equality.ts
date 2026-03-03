@@ -2,6 +2,8 @@
  * Type equality utilities.
  */
 
+import type { IsNever } from './special.js'
+
 /**
  * Checks if two types are strictly equal.
  * Uses a technique that compares the structure while handling
@@ -33,3 +35,21 @@ export type NotEqual<T, U> = Equal<T, U> extends true ? false : true
  * Useful for simple type comparisons.
  */
 export type SimpleEqual<T, U> = [T, U] extends [U, T] ? true : false
+
+/**
+ * Checks if both T and U are `never`.
+ * This is a special case equality check that differs from Equal<T, U>
+ * because Equal<never, never> returns false in TypeScript.
+ *
+ * @example
+ * ```typescript
+ * type Test = IsNeverEqual<never, never> // true
+ * type Test2 = IsNeverEqual<string, never> // false
+ * type Test3 = IsNeverEqual<never, string> // false
+ * ```
+ */
+export type IsNeverEqual<T, U> = IsNever<T> extends true
+  ? IsNever<U> extends true
+    ? true
+    : false
+  : false
