@@ -16,6 +16,14 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./vitest": {
+      "import": "./dist/vitest/index.js",
+      "types": "./dist/vitest/index.d.ts"
+    },
+    "./vitest/setup": {
+      "import": "./dist/vitest/setup.js",
+      "types": "./dist/vitest/setup.d.ts"
     }
   },
   "scripts": {
