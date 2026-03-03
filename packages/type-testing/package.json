@@ -1,7 +1,9 @@
 {
   "name": "@deessejs/type-testing",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "type": "module",
+  "description": "A micro library for compile-time type testing in TypeScript",
+  "keywords": ["typescript", "types", "testing", "type-testing", "vitest", "assertions"],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "homepage": "https://types.deessejs.com",
