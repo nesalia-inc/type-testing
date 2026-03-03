@@ -75,11 +75,18 @@ export type IsPrivate<T, K extends PropertyKey> = K extends keyof T
 
 /**
  * Checks if a property is protected.
+ * Uses the naming convention: properties starting with `_` (but not `__`)
+ * are considered protected.
+ *
+ * Note: TypeScript doesn't have actual `protected` access modifiers for
+ * object properties - this uses the common naming convention where
+ * protected properties are prefixed with `_`.
  *
  * @example
  * ```typescript
  * type Test = IsProtected<{ _protected: string }, '_protected'> // true
  * type Test2 = IsProtected<{ a: string }, 'a'> // false
+ * type Test3 = IsProtected<{ __private: string }, '__private'> // false (private)
  * ```
  */
 export type IsProtected<T, K extends PropertyKey> = K extends keyof T
