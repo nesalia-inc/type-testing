@@ -4,6 +4,14 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "homepage": "https://types.deessejs.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nesalia-inc/type-testing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nesalia-inc/type-testing/issues"
+  },
   "exports": {
     ".": {
       "import": "./dist/index.js",
