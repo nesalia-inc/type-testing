@@ -16,3 +16,27 @@ export type ReturnType<T extends (...args: any[]) => any> = T extends (...args: 
  * Gets the parameter type at a specific index.
  */
 export type Parameter<T extends (...args: any[]) => any, N extends number> = Parameters<T>[N]
+
+/**
+ * Checks if a type is a constructor.
+ *
+ * @example
+ * ```typescript
+ * class Foo {}
+ * type Test = IsConstructor<typeof Foo> // true
+ * type Test2 = IsConstructor<Foo> // false
+ * ```
+ */
+export type IsConstructor<T> = T extends new (...args: any[]) => any ? true : false
+
+/**
+ * Checks if a type is abstract.
+ *
+ * @example
+ * ```typescript
+ * abstract class Foo {}
+ * type Test = IsAbstract<typeof Foo> // true
+ * type Test2 = IsAbstract<Foo> // false
+ * ```
+ */
+export type IsAbstract<T> = T extends abstract new (...args: any[]) => any ? true : false

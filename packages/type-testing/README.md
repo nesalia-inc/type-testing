@@ -139,6 +139,27 @@ HasProperty<{ a: string }, 'b'>  // false
 PropertyType<{ a: string }, 'a'> // string
 ```
 
+### Property Modifiers
+
+```typescript
+import { IsReadonly, IsRequired, IsPublic, IsPrivate, IsProtected } from '@deessejs/type-testing'
+
+// Check if all properties are readonly
+IsReadonly<{ readonly a: string }>  // true
+IsReadonly<{ a: string }>          // false
+
+// Check if all properties are required
+IsRequired<{ a: string }>          // true
+IsRequired<{ a?: string }>        // false
+
+// Check property visibility (uses naming convention)
+IsPublic<{ a: string }, 'a'>       // true
+IsPrivate<{ __private: string }, '__private'>  // true
+IsProtected<{ _protected: string }, '_protected'> // true
+```
+
+> **Note**: `IsPublic`, `IsPrivate`, and `IsProtected` use TypeScript's private field naming convention (`__` prefix) and common JavaScript convention (`_` prefix for protected). These are naming-convention-based checks, not actual TypeScript access modifiers (which don't exist for object properties).
+
 ### Function Types
 
 ```typescript
@@ -162,6 +183,51 @@ import { Length } from '@deessejs/type-testing'
 
 Length<['a', 'b', 'c']>            // 3
 Length<[]>                          // 0
+```
+
+### Deep Type Manipulation
+
+```typescript
+import { DeepReadonly, DeepPartial, RequiredKeys, OptionalKeys } from '@deessejs/type-testing'
+
+// Make all properties readonly recursively
+DeepReadonly<{ a: string; b: { c: number } }>
+// { readonly a: string; readonly b: { readonly c: number } }
+
+// Make all properties optional recursively
+DeepPartial<{ a: string; b: { c: number } }>
+// { a?: string; b?: { c?: number } | undefined }
+
+// Get keys of required properties
+RequiredKeys<{ a: string; b?: number }>  // 'a'
+
+// Get keys of optional properties
+OptionalKeys<{ a: string; b?: number }>  // 'b'
+```
+
+### Constructor & Abstract Types
+
+```typescript
+import { IsConstructor, IsAbstract } from '@deessejs/type-testing'
+
+class Foo {}
+abstract class Bar {}
+
+IsConstructor<typeof Foo>    // true
+IsConstructor<Foo>          // false (instance)
+IsAbstract<typeof Bar>      // true
+IsAbstract<typeof Foo>     // false
+```
+
+### Special Equality
+
+```typescript
+import { IsNeverEqual } from '@deessejs/type-testing'
+
+// Check if both types are never
+// Differs from Equal<never, never> which returns false
+IsNeverEqual<never, never>     // true
+IsNeverEqual<any, any>        // false (any is not never)
 ```
 
 ## Runtime Type Checking
@@ -308,6 +374,7 @@ expectFalse<true>()                         // compile error
 | `Equal<T, U>` | Strict equality check |
 | `NotEqual<T, U>` | Inequality check |
 | `SimpleEqual<T, U>` | Simple equality for plain types |
+| `IsNeverEqual<T, U>` | Check if both types are `never` |
 | `IsAny<T>` | Check if type is `any` |
 | `IsNever<T>` | Check if type is `never` |
 | `IsUnknown<T>` | Check if type is `unknown` |
@@ -323,9 +390,20 @@ expectFalse<true>()                         // compile error
 | `IsUninhabited<T>` | Check if type has no values |
 | `HasProperty<T, K>` | Check if type has property K |
 | `PropertyType<T, K>` | Get type of property K |
+| `IsReadonly<T>` | Check if all properties are readonly |
+| `IsRequired<T>` | Check if all properties are required |
+| `IsPublic<T, K>` | Check if property is public |
+| `IsPrivate<T, K>` | Check if property is private (naming convention) |
+| `IsProtected<T, K>` | Check if property is protected (naming convention) |
+| `DeepReadonly<T>` | Make all properties readonly recursively |
+| `DeepPartial<T>` | Make all properties optional recursively |
+| `RequiredKeys<T>` | Get keys of required properties |
+| `OptionalKeys<T>` | Get keys of optional properties |
 | `Parameters<T>` | Get function parameters as tuple |
 | `ReturnType<T>` | Get function return type |
 | `Parameter<T, N>` | Get parameter at index N |
+| `IsConstructor<T>` | Check if type is a constructor |
+| `IsAbstract<T>` | Check if type is abstract |
 | `Length<T>` | Get tuple/array length |
 | `ExpectTrue<T>` | Assert T is true |
 | `ExpectEqual<T, U>` | Assert T equals U |
