@@ -2,6 +2,7 @@
  * Deep type manipulation utilities.
  */
 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 /**
  * Makes all properties of a type readonly recursively.
  * Properly handles arrays by making array elements readonly as well.
@@ -54,7 +55,7 @@ export type DeepPartial<T> = T extends readonly (infer R)[]
  * ```
  */
 export type RequiredKeys<T> = {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  // Using {} extends Pick<T, K> to detect optional keys (standard TypeScript pattern)
   [K in keyof T]: {} extends Pick<T, K> ? never : K
 }[keyof T]
 
@@ -68,6 +69,6 @@ export type RequiredKeys<T> = {
  * ```
  */
 export type OptionalKeys<T> = {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  // Using {} extends Pick<T, K> to detect optional keys (standard TypeScript pattern)
   [K in keyof T]: {} extends Pick<T, K> ? K : never
 }[keyof T]
