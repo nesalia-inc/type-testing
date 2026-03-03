@@ -337,6 +337,117 @@ expect<string | null>().toBeNullable()       // passes
 expect<string | undefined>().toBeOptional()  // passes
 ```
 
+## Vitest Integration
+
+The library provides a native Vitest integration with custom matchers for a more familiar testing experience.
+
+### Installation
+
+```bash
+npm install @deessejs/type-testing
+```
+
+### Quick Start
+
+```typescript
+import { expectType } from '@deessejs/type-testing/vitest'
+
+// Type equality
+expectType<string>().toBeType<string>()
+expectType<string>().toNotBeType<number>()
+
+// Type extends
+expectType<string>().toExtend<string>()
+expectType<string>().toNotExtend<number>()
+
+// Property check
+expectType<{ a: string }>().toHaveProperty('a')
+
+// Special types
+expectType<any>().toBeAny()
+expectType<never>().toBeNever()
+expectType<unknown>().toBeUnknown()
+expectType<void>().toBeVoid()
+expectType<undefined>().toBeUndefined()
+expectType<null>().toBeNull()
+
+// Nullable/Optional
+expectType<string | null>().toBeNullable()
+expectType<{ a?: string }>().toBeOptional()
+
+// Structure
+expectType<string | number>().toBeUnion()
+expectType<[string, number]>().toBeTuple()
+expectType<string[]>().toBeArray()
+
+// Inhabitation
+expectType<string>().toBeInhabited()
+expectType<never>().toBeUninhabited()
+```
+
+### Using with Vitest's expect.extend
+
+You can also extend Vitest's expect with the matchers:
+
+```typescript
+import { expect, test } from 'vitest'
+import { toBeType, toHaveProperty } from '@deessejs/type-testing/vitest'
+
+expect.extend({ toBeType, toHaveProperty })
+
+test('type checks', () => {
+  expect<string>().toBeType<string>()
+  expect<{ a: string }>().toHaveProperty('a')
+})
+```
+
+### Setup File
+
+For automatic matcher registration, add the setup file to your Vitest config:
+
+```typescript
+// vitest.config.ts
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    setupFiles: ['@deessejs/type-testing/vitest/setup']
+  }
+})
+```
+
+Or import it in your setup file:
+
+```typescript
+// setup.ts
+import '@deessejs/type-testing/vitest/setup'
+```
+
+### Available Matchers
+
+| Matcher | Description |
+|---------|-------------|
+| `toBeType<T>()` | Asserts type equality |
+| `toNotBeType<T>()` | Asserts type inequality |
+| `toExtend<T>()` | Asserts type extends another |
+| `toNotExtend<T>()` | Asserts type does not extend another |
+| `toHaveProperty<K>()` | Asserts property exists |
+| `toBeAny()` | Asserts type is `any` |
+| `toBeNever()` | Asserts type is `never` |
+| `toBeUnknown()` | Asserts type is `unknown` |
+| `toBeVoid()` | Asserts type is `void` |
+| `toBeUndefined()` | Asserts type is `undefined` |
+| `toBeNull()` | Asserts type is `null` |
+| `toBeNullable()` | Asserts type is nullable |
+| `toBeOptional()` | Asserts type is optional |
+| `toBeUnion()` | Asserts type is a union |
+| `toBeTuple()` | Asserts type is a tuple |
+| `toBeArray()` | Asserts type is an array |
+| `toBeInhabited()` | Asserts type is inhabited |
+| `toBeUninhabited()` | Asserts type is uninhabited |
+
+> **Note**: The `toNotBeType` matcher follows a different pattern than standard Vitest (`not.toBeType`). This is intentional as it provides better TypeScript inference. Use `toNotBeType` instead of `.not.toBeType`.
+
 ## Compile-time Assertions
 
 ### ExpectTrue & ExpectEqual
