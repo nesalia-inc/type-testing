@@ -17,7 +17,13 @@
       "Bash(pnpm test)",
       "Bash(git commit:*)",
       "Bash(git add:*)",
-      "Bash(pnpm install)"
+      "Bash(pnpm install)",
+      "Bash(pnpm test:*)",
+      "Bash(gh run list:*)",
+      "Bash(pnpm --filter @deessejs/type-testing test:coverage:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr reviews:*)",
+      "Bash(gh pr list:*)"
     ]
   }
 }
