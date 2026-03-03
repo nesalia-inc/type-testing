@@ -139,6 +139,16 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  examples:
+    dependencies:
+      '@deessejs/type-testing':
+        specifier: ^0.3.1
+        version: 0.3.1
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   packages/type-testing:
     devDependencies:
       '@vitest/coverage-v8':
@@ -379,6 +389,9 @@ packages:
 
   '@date-fns/tz@1.4.1':
     resolution: {integrity: sha512-P5LUNhtbj6YfI3iJjw5EL9eUAG6OitD0W3fWQcpQjDRc/QIsL0tRNuO1PcDvPccWL1fSTXXdE1ds+l95DV/OFA==}
+
+  '@deessejs/type-testing@0.3.1':
+    resolution: {integrity: sha512-VdVlX9Xw1zD5GUmiUDFXC8wt2aHTF+FRo0tnloWgT9chEtnTGNQSABvGFwKmUmpvS6U7XpQFRt66bxwNfItuTQ==}
 
   '@dotenvx/dotenvx@1.52.0':
     resolution: {integrity: sha512-CaQcc8JvtzQhUSm9877b6V4Tb7HCotkcyud9X2YwdqtQKwgljkMRwU96fVYKnzN3V0Hj74oP7Es+vZ0mS+Aa1w==}
@@ -5282,6 +5295,8 @@ snapshots:
       prettier: 2.8.8
 
   '@date-fns/tz@1.4.1': {}
+
+  '@deessejs/type-testing@0.3.1': {}
 
   '@dotenvx/dotenvx@1.52.0':
     dependencies:
