@@ -1,5 +1,9 @@
 /**
  * Custom Vitest matchers for type testing.
+ *
+ * These matchers provide compile-time type checking. At runtime, they return
+ * undefined to allow the test to pass. The actual type checking happens
+ * at compile time through TypeScript's type system.
  */
 
 import type { Equal, NotEqual } from '../types/equality.js'

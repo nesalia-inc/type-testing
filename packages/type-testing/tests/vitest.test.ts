@@ -2,7 +2,7 @@
  * Vitest integration tests.
  */
 
-import { describe, it, expectType } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import {
   toBeType,
   toNotBeType,
@@ -25,8 +25,13 @@ import {
   expectType as exportedExpectType
 } from '../src/vitest'
 
-describe('Vitest matchers', () => {
+describe('Vitest matchers runtime', () => {
   describe('toBeType', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeType<string, string>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeType<string, string>
       const _test: Test = true
@@ -34,6 +39,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toNotBeType', () => {
+    it('should be callable at runtime', () => {
+      const result = toNotBeType<string, number>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toNotBeType<string, number>
       const _test: Test = true
@@ -41,6 +51,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toExtend', () => {
+    it('should be callable at runtime', () => {
+      const result = toExtend<string, string>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toExtend<string, string>
       const _test: Test = true
@@ -48,6 +63,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toNotExtend', () => {
+    it('should be callable at runtime', () => {
+      const result = toNotExtend<string, number>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toNotExtend<string, number>
       const _test: Test = true
@@ -55,6 +75,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toHaveProperty', () => {
+    it('should be callable at runtime', () => {
+      const result = toHaveProperty<{ a: string }, 'a'>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toHaveProperty<{ a: string }, 'a'>
       const _test: Test = true
@@ -62,6 +87,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeAny', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeAny<any>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeAny<any>
       const _test: Test = true
@@ -69,6 +99,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeNever', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeNever<never>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeNever<never>
       const _test: Test = true
@@ -76,6 +111,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeUnknown', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeUnknown<unknown>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeUnknown<unknown>
       const _test: Test = true
@@ -83,6 +123,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeVoid', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeVoid<void>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeVoid<void>
       const _test: Test = true
@@ -90,6 +135,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeUndefined', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeUndefined<undefined>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeUndefined<undefined>
       const _test: Test = true
@@ -97,6 +147,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeNull', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeNull<null>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeNull<null>
       const _test: Test = true
@@ -104,6 +159,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeNullable', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeNullable<string | null>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeNullable<string | null>
       const _test: Test = true
@@ -111,6 +171,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeOptional', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeOptional<{ a?: string }>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeOptional<{ a?: string }>
       const _test: Test = true
@@ -118,6 +183,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeUnion', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeUnion<string | number>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeUnion<string | number>
       const _test: Test = true
@@ -125,6 +195,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeTuple', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeTuple<[string, number]>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeTuple<[string, number]>
       const _test: Test = true
@@ -132,6 +207,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeArray', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeArray<string[]>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeArray<string[]>
       const _test: Test = true
@@ -139,6 +219,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeInhabited', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeInhabited<string>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeInhabited<string>
       const _test: Test = true
@@ -146,6 +231,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('toBeUninhabited', () => {
+    it('should be callable at runtime', () => {
+      const result = toBeUninhabited<never>()
+      expect(result).toBeUndefined()
+    })
+
     it('should have correct type signature', () => {
       type Test = typeof toBeUninhabited<never>
       const _test: Test = true
@@ -153,6 +243,11 @@ describe('Vitest matchers', () => {
   })
 
   describe('expectType', () => {
+    it('should be callable at runtime', () => {
+      const result = exportedExpectType<string>()
+      expect(result).toBeDefined()
+    })
+
     it('should be exported from vitest module', () => {
       const _test = exportedExpectType
     })
