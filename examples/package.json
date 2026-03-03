@@ -7,7 +7,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@deessejs/type-testing": "^0.1.2"
+    "@deessejs/type-testing": "^0.3.1"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
