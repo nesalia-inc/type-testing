@@ -70,7 +70,11 @@ expect<string, string>().toBeEqual()
 - **Union/Tuple/Array Detection** - IsUnion, IsTuple, IsArray
 - **Type Inhabitation** - IsInhabited, IsUninhabited
 - **Property Testing** - HasProperty, PropertyType
+- **Property Modifiers** - IsReadonly, IsRequired, IsPublic, IsPrivate, IsProtected
+- **Deep Type Manipulation** - DeepReadonly, DeepPartial, RequiredKeys, OptionalKeys
 - **Function Types** - Parameters, ReturnType, Parameter
+- **Constructor/Abstract** - IsConstructor, IsAbstract
+- **Special Equality** - IsNeverEqual
 - **Chainable API** - check(), assert(), expect() for fluent testing
 
 ## API Reference
@@ -81,6 +85,7 @@ expect<string, string>().toBeEqual()
 |------|-------------|
 | `Equal<T, U>` | Strict equality check |
 | `NotEqual<T, U>` | Inequality check |
+| `IsNeverEqual<T, U>` | Check if both types are `never` |
 | `IsAny<T>` | Check if type is `any` |
 | `IsNever<T>` | Check if type is `never` |
 | `IsUnknown<T>` | Check if type is `unknown` |
@@ -88,6 +93,17 @@ expect<string, string>().toBeEqual()
 | `IsUnion<T>` | Check if type is a union |
 | `IsTuple<T>` | Check if type is a tuple |
 | `IsArray<T>` | Check if type is an array |
+| `IsReadonly<T>` | Check if all properties are readonly |
+| `IsRequired<T>` | Check if all properties are required |
+| `IsPublic<T, K>` | Check if property is public |
+| `IsPrivate<T, K>` | Check if property is private |
+| `IsProtected<T, K>` | Check if property is protected |
+| `DeepReadonly<T>` | Make all properties readonly recursively |
+| `DeepPartial<T>` | Make all properties optional recursively |
+| `RequiredKeys<T>` | Get keys of required properties |
+| `OptionalKeys<T>` | Get keys of optional properties |
+| `IsConstructor<T>` | Check if type is a constructor |
+| `IsAbstract<T>` | Check if type is abstract |
 
 ### Functions
 
